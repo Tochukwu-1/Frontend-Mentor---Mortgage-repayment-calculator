@@ -1,0 +1,391 @@
+@font-face {
+  font-family: PlusJakartaSans;
+  src: url(../public/fonts/PlusJakartaSans-VariableFont_wght.ttf);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: PlusJakartaSans;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: hsl(202, 86%, 94%);
+  position: relative;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+p {
+  color: hsl(203, 41%, 72%);
+  font-size: 16px;
+}
+
+header {
+  display: flex;
+  justify-content: space-Around;
+  width: 100%;
+  margin-top: 25px;
+}
+h2 {
+  color: hsl(202, 55%, 16%);
+  font-weight: 700;
+}
+h3 {
+  color: #fff;
+  font-weight: 700;
+  font-size: larger;
+}
+
+.container {
+  width: 70%;
+  height: 45%;
+  box-shadow: 0px 0 20px;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background-color: #fff;
+}
+/* left and right   calc & result screen */
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.right {
+  background-color: #122f3f;
+  border-radius: 0 15px 15px 90px;
+  text-align: center;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+.right * {
+  margin: 0 5px;
+}
+aside {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* main */
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* form */
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 85%;
+  height: 95%;
+  margin: 30px 0 10px;
+}
+input[type="number"] {
+  border: none;
+  outline: none;
+  width: 90%;
+  margin: 0 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #122f3f;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: none;
+}
+form label {
+  color: #6b94a8;
+  font-weight: 500;
+}
+b {
+  padding: 10px;
+  background-color: hsl(202, 86%, 94%);
+  color: #4e6e7e;
+  font-weight: 500;
+}
+form .input {
+  margin-top: 7px;
+  border: 2px solid #9abed5;
+  width: 100%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  position: relative;
+}
+form .input:hover {
+  border-color: #122f3f;
+  transition: 500ms;
+}
+/* form .input:focus{
+  border: 2px solid #d7da2f;
+} */
+form .input:focus-within {
+  border-color: #d7da2f;
+  transition: 500ms;
+}
+form .input:focus-within b {
+  background-color: #d7da2f;
+  transition: 500ms;
+}
+
+/* Term and Interest Rate */
+main .termNinterest {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.termNrate {
+  width: 47%;
+}
+
+/* morgage type */
+#morgageType {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: space-between;
+  justify-content: space-around;
+  height: fit-content;
+  margin-top: 7px;
+}
+#morgageType div {
+  border: 2px solid #6b94a8;
+  border-radius: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin: 5px 0;
+}
+#morgageType div:hover {
+  background-color: #d7da2f32;
+  transition: 700ms;
+}
+
+input[type="radio"] {
+  margin-right: 15px;
+  accent-color: #d7da2f;
+  transform: scale(1.5);
+  width: 0;
+  cursor: pointer;
+  position: absolute;
+  opacity: 100%;
+}
+
+label[for="repayment"],
+label[for="interestOnly"] {
+  font-weight: 700;
+  color: #122f3f;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+input + label::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-right: 20px;
+  border: 2px solid #9abed5;
+}
+
+input:checked + label::before {
+  width: 10px;
+  height: 10px;
+  background-color: #d7da2f;
+  border: 5px solid #fff;
+  outline: 2px solid #d7da2f;
+}
+input:checked + label {
+  background-color: #d7da2f35;
+  border-radius: 5px;
+}
+input:focus + label {
+  background-color: #d7da2f35;
+  border-radius: 5px;
+}
+#morgageType .interestOnly:has(input[type="radio"]:checked),
+#morgageType .repayment:has(input[type="radio"]:checked) {
+  border-color: #d7da2f;
+}
+
+/* button */
+.clear {
+  background-color: #fff;
+  border: none;
+  outline: none;
+  font-weight: 500;
+  text-decoration: underline dotted;
+  color: #4e6e7e;
+  cursor: pointer;
+}
+.clear:hover {
+  color: #122f3f;
+  transition: 300ms;
+  text-decoration: underline 1.5px solid #122f3f;
+}
+.repay {
+  background-color: hsl(61, 70%, 52%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 40px;
+  padding: 13px 30px;
+  width: fit-content;
+  border-radius: 30px;
+  border: none;
+  color: #122f3f;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px 0;
+}
+.repay:hover {
+  background-color: #d7da2fb5;
+  transition: 300ms;
+}
+
+.result {
+  height: 80%;
+  width: 80%;
+  margin-top: 30px;
+}
+.result p {
+  margin: 20px 0;
+  line-height: 23px;
+}
+
+.context {
+  height: 40%;
+}
+
+.calculatedresult {
+  display: flex;
+  flex-direction: column;
+  background-color: #0e2430;
+  border-radius: 10px;
+  border-top: 5px solid #d7da2f;
+  height: 60%;
+}
+.calculatedresult label {
+  padding: 10px 0;
+  color: #6b94a8;
+}
+.calculatedresult input {
+  background: none;
+  border: none;
+  outline: none;
+  margin: 10px 0 16px;
+}
+.answer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: left;
+  height: 100%;
+}
+input#monthlyPay {
+  color: #d7da2f;
+  font-size: 30px;
+}
+div.hr {
+  width: 85%;
+  align-self: center;
+  outline: none;
+  border-top: 0.1px solid #6b94a8;
+}
+input#totalPay {
+  color: #fff;
+  font-size: 20px;
+}
+.monthly,
+.total {
+  margin: 20px 25px 25px;
+}
+
+.awaitresult {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.awaitresult h3 {
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.emptyResult {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.emptyResult img {
+  width: 300px;
+  height: 150px;
+}
+
+/* footer */
+footer .attribution {
+  font-size: 12px;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10px;
+  transform: translateX(-50%);
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
+        /* Errors */
+
+form .borderError {
+  border: 2px solid #d73328;
+  transition: 1s;
+}
+form .paragraphError {
+  color: red;
+  margin-bottom: 16px;
+}
+form .backgroundError {
+  background-color: red;
+  color: #fff;
+}
+.none {
+  visibility: hidden;
+}
+.margin {
+  margin-top: 20px;
+}
