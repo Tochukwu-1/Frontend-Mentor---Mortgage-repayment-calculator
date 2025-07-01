@@ -51,6 +51,7 @@ h3 {
   border-radius: 15px;
   display: grid;
   grid-template-columns: 50% 50%;
+  grid-template-rows: auto;
   background-color: #fff;
 }
 /* left and right   calc & result screen */
@@ -70,16 +71,16 @@ h3 {
   height: 100%;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
-}
-.right * {
-  margin: 0 5px;
 }
 aside {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 /* main */
@@ -127,7 +128,7 @@ b {
 }
 form .input {
   margin-top: 7px;
-  border: 2px solid #9abed5;
+  border: 1px solid #9abed5;
   width: 100%;
   border-radius: 5px;
   display: flex;
@@ -172,7 +173,7 @@ main .termNinterest {
   margin-top: 7px;
 }
 #morgageType div {
-  border: 2px solid #6b94a8;
+  border: 1px solid #6b94a8;
   border-radius: 7px;
   display: flex;
   justify-content: space-between;
@@ -181,8 +182,8 @@ main .termNinterest {
   margin: 5px 0;
 }
 #morgageType div:hover {
-  background-color: #d7da2f32;
-  transition: 700ms;
+  border: 1.5px solid #d7da2f;
+  transition: 400ms;
 }
 
 input[type="radio"] {
@@ -199,7 +200,7 @@ label[for="repayment"],
 label[for="interestOnly"] {
   font-weight: 700;
   color: #122f3f;
-  padding: 10px;
+  padding: 12px;
   width: 100%;
   cursor: pointer;
   position: relative;
@@ -214,28 +215,29 @@ input + label::before {
   border-radius: 50%;
   background-color: #fff;
   margin-right: 20px;
-  border: 2px solid #9abed5;
+  border: 1px solid #9abed5;
 }
 
 input:checked + label::before {
   width: 10px;
   height: 10px;
   background-color: #d7da2f;
-  border: 5px solid #fff;
+  border: 4px solid #f8f9f4ae;
   outline: 2px solid #d7da2f;
 }
 input:checked + label {
-  background-color: #d7da2f35;
+  background-color: #d7da2f25;
   border-radius: 5px;
 }
 input:focus + label {
-  background-color: #d7da2f35;
   border-radius: 5px;
+  outline: 2px solid #d7da2f;
 }
 #morgageType .interestOnly:has(input[type="radio"]:checked),
 #morgageType .repayment:has(input[type="radio"]:checked) {
   border-color: #d7da2f;
 }
+
 
 /* button */
 .clear {
@@ -251,6 +253,16 @@ input:focus + label {
   color: #122f3f;
   transition: 300ms;
   text-decoration: underline 1.5px solid #122f3f;
+}
+@keyframes myslide{
+  from {text-decoration: none;}
+  to   {text-decoration: underline;}
+}
+.clear:focus {
+  color: #122f3f;
+  transition: 300ms;
+  animation: myslide 1s infinite;
+  text-decoration: underline 2px solid #122f3f;
 }
 .repay {
   background-color: hsl(61, 70%, 52%);
@@ -269,22 +281,35 @@ input:focus + label {
   margin: 10px 0;
 }
 .repay:hover {
-  background-color: #d7da2fb5;
+  background-color: #d7da2f89;
   transition: 300ms;
+}
+.repay:focus {
+  background-color: #d7da2f89;
+  transition: 300ms;
+  outline: 2px solid #bfc20f;
 }
 
 .result {
   height: 80%;
   width: 80%;
-  margin-top: 30px;
+  margin-bottom: 50px;
 }
-.result p {
-  margin: 20px 0;
-  line-height: 23px;
+
+.answer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: left;
+  height: 100%;
 }
 
 .context {
-  height: 40%;
+  height: auto;
+  margin:  0 10px;
+}
+.context p{
+  margin-top: 10px;
 }
 
 .calculatedresult {
@@ -293,24 +318,18 @@ input:focus + label {
   background-color: #0e2430;
   border-radius: 10px;
   border-top: 5px solid #d7da2f;
-  height: 60%;
+  height: auto;
+  margin-top: 20px;
 }
 .calculatedresult label {
-  padding: 10px 0;
+  margin: 10px 0 0;
   color: #6b94a8;
 }
 .calculatedresult input {
   background: none;
   border: none;
   outline: none;
-  margin: 10px 0 16px;
-}
-.answer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: left;
-  height: 100%;
+  margin: 10px 0 2px;
 }
 input#monthlyPay {
   color: #d7da2f;
@@ -329,6 +348,10 @@ input#totalPay {
 .monthly,
 .total {
   margin: 20px 25px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .awaitresult {
@@ -372,7 +395,7 @@ footer .attribution {
         /* Errors */
 
 form .borderError {
-  border: 2px solid #d73328;
+  border: 1px solid #d73328;
   transition: 1s;
 }
 form .paragraphError {
@@ -388,4 +411,85 @@ form .backgroundError {
 }
 .margin {
   margin-top: 20px;
+}
+
+
+            /* screen sizes */
+@media only screen and (max-width:500px) {
+
+body{
+  height: auto;
+  box-sizing: border-box;
+  width: 100vw;
+}
+.margin {
+  margin-top: 0px;
+}
+
+header{
+  flex-direction: column;
+  align-items: flex-start;
+  width: 85%;
+}
+
+.container{
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto;
+}
+  main .termNinterest {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.termNrate {
+  width: 100%;
+}
+.clear{
+  margin-top: 10px;
+}
+.right{
+  width: 100%;
+  padding: 20px 0;
+border-radius: 0;
+}
+.result{
+  width: 90%;
+}
+.right, left {
+margin: 0;
+}
+footer .attribution{
+  position: static;
+  transform: translateX(0);
+  margin-top: 10px;
+}
+}
+
+@media only screen and (min-width:501px  ){
+.container{
+  width: 90%;
+  font-size: small;
+}
+body{
+max-height: auto;
+}
+header{
+width: 90%;
+}
+}
+
+@media only screen and (min-width: 800px) {
+  .container{
+  width: 80%;
+}
+
+}
+@media only screen and (min-width: 1000px) {
+  .container{
+  width: 70%;
+}
 }

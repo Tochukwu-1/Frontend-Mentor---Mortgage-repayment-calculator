@@ -4,22 +4,25 @@ import "./App.css";
 
 export default function App() {
 const [isNotFilled, setIsNotFilled] = useState(false);
-
-  const [amount, setAmount] = useState("");
-  const [term, setTerm] = useState("");
-  const [interestRate, setInterestRate] = useState("");
-  const [type, setType] = useState("");
-  const [result, setResult] = useState(null);
-  const monthlyPay = result / term / 12;
-  const totalPay = result;
+const [calculationValue, setCalculationValue] = useState({
+      amount: "",
+      term: "",
+      interestRate: "",
+      type: "",
+  })
+const [result, setResult] = useState(null);
+const monthlyPay = result / calculationValue.term / 12;
+const totalPay = result;
 
   function handleClear() {
-    setAmount("");
-    setTerm("");
-    setInterestRate("");
-    setType("");
     setResult(null);
     setIsNotFilled(false);
+    setCalculationValue({
+        amount: "",
+        term: "",
+        interestRate: "",
+        type: ""
+    })
   }
   useEffect(()=>{
     const handleKeyDown = (e)=>{
@@ -42,15 +45,9 @@ const [isNotFilled, setIsNotFilled] = useState(false);
           </header>
           <main>
             <Form
-              amount={amount}
-              term={term}
-              interestRate={interestRate}
-              type={type}
+            setCalculationValue ={setCalculationValue}
+            calculationValue={calculationValue}
               isNotFilled={isNotFilled}
-              setAmount={setAmount}
-              setTerm={setTerm}
-              setInterestRate={setInterestRate}
-              setType={setType}
               setIsNotFilled={setIsNotFilled}
               setResult={setResult}
             />
@@ -88,80 +85,90 @@ function Button({ children, onClick, className, type }) {
 }
 
 function Form({
-  amount,
-  term,
-  interestRate,
-  type,
-  setAmount,
-  setTerm,
-  setInterestRate,
-  setType,
   setResult,
   isNotFilled, 
   setIsNotFilled,
+  calculationValue,
+  setCalculationValue,
 }) {
   
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (term==="" || interestRate==="" || type==="" || !amount){ 
+    if (calculationValue.term==="" || calculationValue.interestRate==="" || calculationValue.type==="" || calculationValue.amount===""){ 
       setIsNotFilled(true)
       return;
     };
     setIsNotFilled(false)
 
-    if (type === "interestOnly") {
-      setResult((interestRate * amount) / 100);
+    if (calculationValue.type === "interestOnly") {
+      setResult((calculationValue.interestRate * calculationValue.amount) / 100);
     }
-    if (type === "repayment") {
-      setResult(amount + (interestRate * amount) / 100);
+    if (calculationValue.type === "repayment") {
+      setResult(calculationValue.amount + (calculationValue.interestRate * calculationValue.amount) / 100);
     }
+  }
+  function handleInput(e){
+    if(e.target.name !== "type"){
+      setCalculationValue({
+      ...calculationValue,
+      [e.target.name]: Number(e.target.value)
+    })
+    return;
+  }
+      setCalculationValue({
+      ...calculationValue,
+      [e.target.name]: e.target.value,
+    })
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="morgageAmt">
         <label htmlFor="morgageAmt">Morgage Amount</label>
-          <p className={amount ? "input": isNotFilled && amount===""? "input borderError": "input"}>
-            <b className={amount ? "": isNotFilled && amount===""?"backgroundError":""}>£</b>
+          <p className={calculationValue.amount ? "input": isNotFilled && calculationValue.amount===""? "input borderError": "input"}>
+            <b className={calculationValue.amount ? "": isNotFilled && calculationValue.amount===""?"backgroundError":""}>£</b>
             <input
               id="morgageAmt"
+              name="amount"
               type="number"
-              value={amount}
-              onInput={(e) => setAmount(Number(e.target.value))}
+              value={calculationValue.amount<0? -calculationValue.amount: ""+calculationValue.amount}
+              onInput={handleInput}
+              onBlur={()=> calculationValue.amount ===0? setCalculationValue({...calculationValue, amount:""}): calculationValue.amount}
               />
           </p>
-          <p className={amount ? "none": isNotFilled && amount===""?"paragraphError":"none"}>This field is required</p>
+          <p className={calculationValue.amount ? "none": isNotFilled && calculationValue.amount===""?"paragraphError":"none"}>This field is required</p>
       </div>
       
       <div className="termNinterest">
         <div className="termNrate">
           <label htmlFor="morgageTerm">Morgage Term</label>
-          <p className={term ? "input": isNotFilled&&term ===""?"input borderError":"input"}>
+          <p className={calculationValue.term ? "input": isNotFilled&&calculationValue.term ===""?"input borderError":"input"}>
             <input
               id="morgageTerm"
               type="number"
-              value={term>=0 ? ""+term:''}
-              onBlur={()=>setTerm(term===0? "":term)}
-              onInput={(e) => setTerm(Number(e.target.value))}
+              name="term"
+              value={calculationValue.term>=0 ? ""+calculationValue.term:''}
+              onBlur={()=> calculationValue.term===0? setCalculationValue({...calculationValue, term:""}):calculationValue.term}
+              onInput={handleInput}
             />
-            <b className={term ? "": isNotFilled && term===""?"backgroundError": ""}>years</b>
+            <b className={calculationValue.term ? "": isNotFilled && calculationValue.term===""?"backgroundError": ""}>years</b>
           </p>
-          <p className={isNotFilled&&interestRate && term?"none":isNotFilled && interestRate==="" && term? "none margin": isNotFilled && (term==="")?"paragraphError":"none" }>This field is required</p>
-       </div>
-       {/* (isNotFilled && term && interestRate) || (isNotFilled!==true && term && interestRate!==true) || (isNotFilled!==true && term && interestRate) */}
+          <p className={isNotFilled&&calculationValue.interestRate && calculationValue.term?"none":isNotFilled && calculationValue.interestRate==="" && calculationValue.term? "none margin": isNotFilled && (calculationValue.term==="")?"paragraphError":"none" }>This field is required</p>
+        </div>
         <div className="termNrate">
           <label htmlFor="interestRate">Interest Rate</label>
-          <p className={interestRate ? "input": isNotFilled && interestRate===""? "input borderError": "input"}>
+          <p className={calculationValue.interestRate ? "input": isNotFilled && calculationValue.interestRate===""? "input borderError": "input"}>
             <input
               id="interestRate"
+              name="interestRate"
               type="number"
-              value={interestRate<0? -interestRate: ""+interestRate}
-              onInput={(e) => setInterestRate(Number(e.target.value))}
+              value={calculationValue.interestRate<0? -calculationValue.interestRate: ""+calculationValue.interestRate}
+              onInput={handleInput}
             />
-            <b className={interestRate ? "": isNotFilled && interestRate===""? "backgroundError":""}>%</b>
+            <b className={calculationValue.interestRate ? "": isNotFilled && calculationValue.interestRate===""? "backgroundError":""}>%</b>
           </p>
-          <p className={isNotFilled&&interestRate && term?"none":isNotFilled && (interestRate|| interestRate===0) && term===""? "none margin": isNotFilled && interestRate===""? "paragraphError":"none"}>This field is required</p>
+          <p className={isNotFilled&&calculationValue.interestRate && calculationValue.term?"none":isNotFilled && (calculationValue.interestRate|| calculationValue.interestRate===0) && calculationValue.term===""? "none margin": isNotFilled && calculationValue.interestRate===""? "paragraphError":"none"}>This field is required</p>
         </div>
       </div>
 
@@ -172,10 +179,10 @@ function Form({
             <input
               type="radio"
               id="repayment"
-              name="morgageType"
+              name="type"
               value="repayment"
-              checked={type === "repayment"}
-              onChange={(e) => setType(e.target.value)}
+              checked={calculationValue.type === "repayment"}
+              onChange={handleInput}
             />
             <label htmlFor="repayment">Repayment</label>
           </div>
@@ -184,14 +191,14 @@ function Form({
             <input
               type="radio"
               id="interestOnly"
-              name="morgageType"
+              name="type"
               value="interestOnly"
-              checked={type === "interestOnly"}
-              onChange={(e) => setType(e.target.value)}
+              checked={calculationValue.type === "interestOnly"}
+              onChange={handleInput}
             />
             <label htmlFor="interestOnly">Interest Only</label>
           </div>
-          <p className={isNotFilled && type==="" ? "paragraphError": isNotFilled===false && type===""? "none":type?"none":"paragraphError"}>This field is required</p>
+          <p className={isNotFilled && calculationValue.type==="" ? "paragraphError": isNotFilled===false && calculationValue.type===""? "none":calculationValue.type?"none":"paragraphError"}>This field is required</p>
         </div>
       </div>
       <Button className={"repay"} type="submit" ><img src="./images/icon-calculator.svg" alt="" /> Calculate Repayments</Button>
@@ -205,14 +212,14 @@ function Result({ result, totalPay, monthlyPay }) {
       {result !== null && (
         <div className="answer">
           <div className="context">
-              <h3>Your results</h3>
-              <p>
-                Your results are shown below based on the information you provided.
-                To adjust the results, edit the form and click “calculate
-                repayments” again.
-              </p>
+            <h3>Your results</h3>
+            <p>
+              Your results are shown below based on the information you provided.
+              To adjust the results, edit the form and click “calculate
+              repayments” again.
+            </p>
           </div>
-          <div className="calculatedresult ">
+          <div className="calculatedresult">
             <div className="monthly">
               <label htmlFor="monthlyPay">Your monthly repayments</label>
               <input
