@@ -17,11 +17,6 @@ body {
   background-color: hsl(202, 86%, 94%);
   position: relative;
 }
-.App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 p {
   color: hsl(203, 41%, 72%);
@@ -44,9 +39,17 @@ h3 {
   font-size: larger;
 }
 
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80vw;
+  height: auto;
+}
 .container {
-  width: 70%;
-  height: 45%;
+  width: 100%;
+  height: 100%;
   box-shadow: 0px 0 20px;
   border-radius: 15px;
   display: grid;
@@ -102,7 +105,7 @@ form {
   height: 95%;
   margin: 30px 0 10px;
 }
-input[type="number"] {
+input[type="text"] {
   border: none;
   outline: none;
   width: 90%;
@@ -111,14 +114,16 @@ input[type="number"] {
   font-weight: 700;
   color: #122f3f;
 }
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: none;
-}
+
 form label {
   color: #6b94a8;
   font-weight: 500;
+}
+.amountlogo{
+  border-radius: 5px 0 0 5px;
+}
+.termlogo, .interestlogo{
+   border-radius: 0 5px 5px 0;
 }
 b {
   padding: 10px;
@@ -140,9 +145,7 @@ form .input:hover {
   border-color: #122f3f;
   transition: 500ms;
 }
-/* form .input:focus{
-  border: 2px solid #d7da2f;
-} */
+
 form .input:focus-within {
   border-color: #d7da2f;
   transition: 500ms;
@@ -290,6 +293,10 @@ input:focus + label {
   outline: 2px solid #bfc20f;
 }
 
+
+
+        /* result page */
+
 .result {
   height: 80%;
   width: 80%;
@@ -301,12 +308,13 @@ input:focus + label {
   flex-direction: column;
   justify-content: space-around;
   text-align: left;
+  width: 100%;
   height: 100%;
 }
 
 .context {
   height: auto;
-  margin:  0 10px;
+  /* margin:  0 10px; */
 }
 .context p{
   margin-top: 10px;
@@ -322,7 +330,7 @@ input:focus + label {
   margin-top: 20px;
 }
 .calculatedresult label {
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   color: #6b94a8;
 }
 .calculatedresult input {
@@ -359,6 +367,7 @@ input#totalPay {
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .awaitresult h3 {
   color: #fff;
@@ -369,7 +378,7 @@ input#totalPay {
   display: flex;
   flex-direction: column;
   height: 50%;
-  width: 100%;
+  width: 92%;
   justify-content: center;
   align-items: center;
   margin-top: 30px;
@@ -422,16 +431,10 @@ body{
   box-sizing: border-box;
   width: 100vw;
 }
-.margin {
-  margin-top: 0px;
+.App{
+  width: 100vw;
+  height: auto;
 }
-
-header{
-  flex-direction: column;
-  align-items: flex-start;
-  width: 85%;
-}
-
 .container{
   width: 100%;
   height: 100%;
@@ -440,13 +443,23 @@ header{
   grid-template-rows: auto auto;
   grid-template-columns: auto;
 }
-  main .termNinterest {
+
+header{
+  flex-direction: column;
+  align-items: flex-start;
+  width: 85%;
+}
+
+main .termNinterest {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 .termNrate {
   width: 100%;
+}
+.margin {
+  margin-top: 0px;
 }
 .clear{
   margin-top: 10px;
@@ -469,9 +482,12 @@ footer .attribution{
 }
 }
 
-@media only screen and (min-width:501px  ){
+
+@media only screen and (min-width:501px  ) and (max-width: 799px){
+.App{
+  width: 85vw;
+}
 .container{
-  width: 90%;
   font-size: small;
 }
 body{
@@ -480,16 +496,38 @@ max-height: auto;
 header{
 width: 90%;
 }
+footer .attribution{
+  position: static;
+  transform: translateX(0);
+  margin-top: 10px;
+}
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 1200px){
   .container{
   width: 80%;
 }
+}
+@media only screen and (min-width: 1400px){
+  .container{
+  width: 1000px;
+}
 
 }
-@media only screen and (min-width: 1000px) {
-  .container{
-  width: 70%;
+
+/* for screen rotation */
+@media screen and (max-height: 500px) {
+  body{
+    height: auto;
+  }
+  .App{
+    margin-top: 30px;
+  }
+  footer .attribution{
+  position: static;
+  transform: translateX(0);
+  margin-top: 10px;
 }
+
+  
 }
