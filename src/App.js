@@ -71,7 +71,7 @@ import Button from "./Button";
           <a href="https://www.frontendmentor.io?ref=challenge">
             Frontend Mentor
           </a>
-          . Coded by <a href="#me">Asogwa Tochukwu Gabriel</a>.
+          . Coded by <a href="https://x.com/A__Gabriel__T">Asogwa Tochukwu Gabriel</a>.
         </div>
       </footer>
     </div>

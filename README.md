@@ -41,7 +41,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Solution URL](https://github.com/Tochukwu-1/Frontend-Mentor---Mortgage-repayment-calculator)
-- Live Site URL: [Live site URL](https://your-live-site-url.com)
+- Live Site URL: [Live site URL](https://tochukwu-1.github.io/Mortgage-repayment-calculator/)
 
 ## My process
 - Adding of semantic HTML to separate the webpage into different sections.

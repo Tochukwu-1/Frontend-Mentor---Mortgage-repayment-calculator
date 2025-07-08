@@ -42,7 +42,7 @@ function Result({ result, totalPay, calculationValue }) {
       )}
       {result === null && (
         <div className="emptyResult">
-          <img src="./images/illustration-empty.svg" alt="" />
+          <img src="./images/illustration-empty.svg" alt="Empty" />
           <br />
           <h3>Results Shown Here</h3>
           <p>
