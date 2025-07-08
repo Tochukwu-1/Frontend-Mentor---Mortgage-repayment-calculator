@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Mortgage-repayment-calculator/static/css/main.fa15f14e.css",
+    "main.js": "/Mortgage-repayment-calculator/static/js/main.4606f75f.js",
+    "static/media/PlusJakartaSans-VariableFont_wght.ttf": "/Mortgage-repayment-calculator/static/media/PlusJakartaSans-VariableFont_wght.91a892b057d3b1e6c20b.ttf",
+    "index.html": "/Mortgage-repayment-calculator/index.html",
+    "main.fa15f14e.css.map": "/Mortgage-repayment-calculator/static/css/main.fa15f14e.css.map",
+    "main.4606f75f.js.map": "/Mortgage-repayment-calculator/static/js/main.4606f75f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fa15f14e.css",
+    "static/js/main.4606f75f.js"
+  ]
+}
